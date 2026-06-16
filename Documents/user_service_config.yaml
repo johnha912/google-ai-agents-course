@@ -1,0 +1,18 @@
+# Configuration settings for user_service
+# Generated on 2026-06-16
+
+server:
+  host: "0.0.0.0"
+  port: 8080
+  environment: "development"
+
+database:
+  host: "localhost"
+  port: 5432
+  username: "user_service_db_admin"
+  password: "secure_placeholder_password_99"
+  database_name: "user_service_db"
+
+api_keys:
+  payment_gateway: "sk_test_51NzABC1234567890placeholder"
+  email_service: "sg_key_ABC1234567890placeholder"
