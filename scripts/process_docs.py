@@ -4,7 +4,7 @@ import shutil
 import datetime
 
 # Directories
-WORKSPACE = os.path.dirname(os.path.abspath(__file__))
+WORKSPACE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 DOCUMENTS_DIR = os.path.join(WORKSPACE, "Documents")
 FINANCIAL_INVOICES_DIR = os.path.join(WORKSPACE, "Financial", "Invoices")
 FINANCIAL_RECEIPTS_DIR = os.path.join(WORKSPACE, "Financial", "Receipts")

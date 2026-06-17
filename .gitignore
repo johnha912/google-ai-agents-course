@@ -101,6 +101,10 @@ celerybeat.pid
 # Environments
 .env
 .flaskenv
+.venv
+.venv*
+.adk/
+.google-agents-cli/
 env/
 venv/
 ENV/
