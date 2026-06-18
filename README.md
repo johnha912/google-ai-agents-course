@@ -10,8 +10,10 @@ The workspace has been organized into a logical directory structure:
 .
 ├── agents/                  # AI Agent projects
 │   ├── my-agent/            # ReAct assistant with custom weather/time tools (playground & evals)
-│   └── weather-assistant/   # ReAct weather assistant with containerization & local configs
+│   ├── weather-assistant/   # ReAct weather assistant with containerization & local configs
+│   └── ambient-expense-agent/ # Event-driven corporate expense agent with security screening and local evals
 │
+
 ├── apps/                    # Web applications
 │   └── bq-release-notes/    # Flask dashboard that tracks and parses Google BigQuery RSS release notes
 │
@@ -51,7 +53,7 @@ A Flask-based dashboard that fetches, parses, and displays BigQuery release note
 * **Dashboard Access**: `http://127.0.0.1:5000`
 
 ### 2. AI Agents (using `agents-cli`)
-Two agents implementing the ReAct framework using the Gemini model and ADK (Agent Development Kit).
+ReAct agents implementing custom tool use with the Gemini model and ADK (Agent Development Kit).
 
 * **Location**: `agents/my-agent/` and `agents/weather-assistant/`
 * **Local Interactive Playground**:
@@ -66,14 +68,31 @@ Two agents implementing the ReAct framework using the Gemini model and ADK (Agen
   agents-cli eval grade
   ```
 
-### 3. Custom Agent Skills
+### 3. Ambient Expense Approval Agent
+An event-driven ambient service that processes corporate expenses, implements strict security checkpoints (PII scrubbing and prompt injection defense), and supports local evaluations using custom LLM-as-judge criteria.
+
+* **Location**: `agents/ambient-expense-agent/`
+* **Local Web Service (FastAPI)**:
+  ```bash
+  cd agents/ambient-expense-agent
+  uv run python -m expense_agent.fast_api_app
+  ```
+  *(Runs a local FastAPI server on port 8080. Normalizes Pub/Sub push notification payloads.)*
+* **Running Evaluations**:
+  ```bash
+  cd agents/ambient-expense-agent
+  uv run python tests/eval/run_and_report.py
+  ```
+  *(Runs the synthetic dataset, intercepts HITL decisions, and outputs the routing and security scorecard.)*
+
+### 4. Custom Agent Skills
 Custom skills generated and structured to extend agent capabilities:
 * **Database Schema Validator**: Validates SQL database schemas against design rules.
 * **Git Commit Formatter**: Generates semantic commits.
 * **JSON to Pydantic**: Translates JSON models directly to structured Pydantic classes.
 * **License Header Adder**: Prepends licensing headers to codebase files.
 
-### 4. Document Processing Scripts
+### 5. Document Processing Scripts
 Automated document management pipeline.
 * **Location**: `scripts/process_docs.py`
 * **Features**:
